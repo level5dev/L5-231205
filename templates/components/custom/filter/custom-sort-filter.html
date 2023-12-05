@@ -1,0 +1,49 @@
+
+{{#if (getVar "filter-type") "===" "mobile"}}
+
+    
+     <div class="filter-wrapper" sort-block>
+        <label label-sort class="form-label form-select--small"  for="sort">SORT:</label>
+        <select class="form-select" name="sort" id="all-sort-select" all-sort-select-mobile role="listbox" disabled>
+            {{#if (length category.subcategories) '===' 0 }}
+            <option value="custom_sort_order-asc" >Default</option>
+            {{/if}}
+            <option value="best_selling-asc" >{{lang 'common.sorter.top_sellers'}}</option>
+            {{!-- <option value="newest-asc" >{{lang 'common.sorter.newest'}}</option> --}}
+            {{!-- <option value="name-asc" >{{lang 'common.sorter.alpha_asc'}}</option> --}}
+            {{!-- <option value="name-desc" >{{lang 'common.sorter.alpha_desc'}}</option> --}}
+            {{!-- <option value="review-desc" >{{lang 'common.sorter.reviews'}}</option> --}}
+            <option value="price-asc" >{{lang 'common.sorter.price_asc'}}</option>
+            <option value="price-desc" >{{lang 'common.sorter.price_desc'}}</option>
+
+            {{#if result_count}}
+            <option value="relevance" {{#if sort '==' 'relevance'}}selected{{/if}}>{{lang 'common.sorter.relevance'}}</option>
+            {{/if}}
+        </select>
+    </div>
+    
+
+{{else}}
+    
+    <div class="filter-wrapper" sort-block>
+        <label class="form-label form-select--small" for="sort">{{lang 'common.sorter.sort_by'}}</label>
+        <select class="form-select" name="sort" id="all-sort-select" all-sort-select-pc {{getVar "no-filter"}} role="listbox" disabled>
+            {{#if (length category.subcategories) '===' 0 }}
+            <option value="custom_sort_order-asc" >Default</option>
+            {{/if}}
+            <option value="best_selling-asc" >{{lang 'common.sorter.top_sellers'}}</option>
+           {{!--  <option value="newest-asc" >{{lang 'common.sorter.newest'}}</option>
+            <option value="name-asc" >{{lang 'common.sorter.alpha_asc'}}</option>
+            <option value="name-desc" >{{lang 'common.sorter.alpha_desc'}}</option>
+            <option value="review-desc" >{{lang 'common.sorter.reviews'}}</option> --}}
+            <option value="price-asc" >{{lang 'common.sorter.price_asc'}}</option>
+            <option value="price-desc" >{{lang 'common.sorter.price_desc'}}</option>
+
+            {{#if result_count}}
+            <option value="relevance" {{#if sort '==' 'relevance'}}selected{{/if}}>{{lang 'common.sorter.relevance'}}</option>
+            {{/if}}
+        </select>
+    </div>
+    {{setVar "filter-type" ""}}
+   
+{{/if}}

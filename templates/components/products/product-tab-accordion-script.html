@@ -1,0 +1,69 @@
+<script>
+  console.log('product-tab')
+    const targetNode = document.querySelector('.productView-description');
+    let isElementAppended = false;
+    
+    function appendScript() {
+      // Create a new script element
+      const script = document.createElement('script');
+      script.src = "{{cdn 'assets/js/theme/custom/accordion.js'}}";
+      script.type = "module";
+    
+      // Append the script to the document body or any other appropriate location
+      document.body.appendChild(script);
+    }
+    tabScript();
+    function tabScript(){
+      const cbox = document.querySelectorAll("li.tab");
+      const tabContent = document.querySelectorAll(".tab-content");
+      let tabID;
+      for (let i = 0; i < cbox.length; i++) {
+          cbox[i].addEventListener("click", function () {
+              tabID = this.getAttribute('data-id')
+
+              for (let i = 0; i < cbox.length; i++) {
+                  cbox[i].classList.remove('is-active')
+              }
+              this.classList.add('is-active')
+
+              for (let j = 0; j < tabContent.length; j++) {
+                  tabContent[j].classList.remove('is-active')
+              }
+              document.getElementById(tabID).classList.add('is-active')
+          });
+      }
+    }
+    
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.addedNodes) {
+          for (const addedNode of mutation.addedNodes) {
+            if (addedNode.nodeType === 1 && addedNode.getAttribute('data-accPosition') === 'last') {
+                var $thirdAccordion = document.querySelector('[data-accPosition="last"]');
+                var $firstAccordion = document.querySelector('[data-accPosition="first"]');
+    
+                $thirdAccordion.parentNode.insertBefore($thirdAccordion, $firstAccordion);
+    
+                observer.disconnect();
+                isElementAppended = true;
+    
+                tabScript();
+                appendScript();
+                break;
+            }
+          }
+        }
+      }
+    });
+    
+    observer.observe(targetNode, { childList: true, subtree: true });
+    
+    // Run appendScript() after a certain timeout
+    setTimeout(() => {
+      if (!isElementAppended) {
+        appendScript();
+      }
+    }, 1000); // Adjust the timeout duration as needed
+    
+    
+</script>

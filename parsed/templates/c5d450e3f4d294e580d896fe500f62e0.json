@@ -1,0 +1,1 @@
+{"components/custom/filter/custom-filter-box-at-top-grid":"<div class=\"filter-list_container\" {{getVar 'type'}}>\n</div>\n"}

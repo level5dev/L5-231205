@@ -1,0 +1,34 @@
+<nav aria-label="Breadcrumb">
+    <ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {{#unless theme_settings.hide_breadcrumbs }}
+            {{#each breadcrumbs}}
+                {{#if @last}}
+                    
+                {{else}}
+                    <li class="breadcrumb" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a class="breadcrumb-label"
+                       itemprop="item"
+                       href="{{url}}"
+                       {{#if @last}}aria-current="page"{{/if}}
+                    >
+                        <span itemprop="name">{{name}}</span>
+   
+                    </a>
+                    <meta itemprop="position" content="{{add @index 1}}" />
+                </li>
+                {{/if}}
+                
+            {{/each}}
+        {{/unless}}
+    </ol>
+</nav>
+
+<script>
+(function () {
+    const bc_li = document.querySelectorAll(`.product-page--breadcrumb.breadcrumb-mobile ol li`);
+    const last_li = bc_li[bc_li.length - 1];
+    document.querySelector(`.product-page--breadcrumb.breadcrumb-mobile ol`).innerHTML = 
+    `<li></li>${last_li.outerHTML}`
+    ;
+})();
+</script>

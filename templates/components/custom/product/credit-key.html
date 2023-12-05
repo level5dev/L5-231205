@@ -1,0 +1,12 @@
+<script crossorigin src="https://unpkg.com/@credit-key/creditkey-js@latest/umd/creditkey-js.js"></script>
+
+<div id="creditkeypdp" style="margin-bottom:{{margin}};margin-left:-6px;"></div>
+<script>
+    let ckPrice = document.getElementsByClassName('price price--withoutTax')[0].innerHTML.replace(/,|\$/g, '');
+    let client = new ck.Client('level_912fb11184834a4dbec915e772e86fe2', 'production');
+    let charges = new ck.Charges(ckPrice, 0, 0, 0, ckPrice);//Pass product price into the Charges object
+    creditkeypdp.innerHTML = client.get_pdp_display(charges);
+    
+    // console.log(client.get_pdp_display(charges));
+    
+</script>

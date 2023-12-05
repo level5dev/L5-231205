@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+{{assignVar "hasVideo" "false"}}
+{{#filter product.custom_fields '__product-blog-video' property='name'}}
+    {{assignVar "hasVideo" "true"}}
+{{/filter}}
+
+{{inject "hasVideo" (getVar "hasVideo")}}
+
+<h2>PRODUCT INFO</h2>
+<div class="tabs-wrapper tabs-desktop">
+    <ul class="container tabs" data-tab data-accTab>
+        {{> components/custom/schematic/schematic-tab }}
+        {{!-- 
+        {{#if product.description}}
+            <li class="tab is-active" data-accTabId="tab-description">
+                <a class="tab-title" href="#tab-description">{{lang 'products.description'}}</a>
+            </li>
+        {{/if}} 
+        --}}
+        {{#if (getVar "hasVideo") "===" "true"}}
+            <li class="tab tab--videos {{#unless product.description}}is-active{{/unless}}" data-accTabId="tab-videos">
+                <a class="tab-title" href="#tab-videos">VIDEOS</a>
+            </li>
+        {{/if}}
+        {{#if product.warranty}}
+            <li class="tab tab--warranty {{#unless (getVar 'hasVideo') '===' 'true'}}is-active{{/unless}}" data-accTabId="tab-warranty">
+                <a class="tab-title" href="#tab-warranty">{{lang 'products.warranty'}}</a>
+            </li>
+        {{/if}}
+    </ul>
+</div>
+
+<div class="tabs-contents">
+    {{!--
+    {{#if product.description}}
+    <div data-tabcon="tab-description">
+        <a class="dropdown-toggle w-dropdown-toggle accordion-mobile" data-accordion="tab-description">
+            <div class="accordion-title white">{{lang 'products.description'}}</div>
+            <i class="fas fa-sharp fa-chevron-down" style="color: #ffffff;" accordion-ddown></i>
+        </a>
+        <div class="tab-content tab-content--description is-active" id="tab-description" accordion-mobile-content>
+            <div class="container">
+                {{{product.description}}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    --}}
+    
+    {{#if (getVar "hasVideo") "===" "true"}}
+    <div data-tabcon="tab-videos">
+        <a class="dropdown-toggle w-dropdown-toggle accordion-mobile" data-accordion="tab-videos">
+            <div class="accordion-title white">VIDEOS</div>
+            <i class="fas fa-sharp fa-chevron-down" style="color: #ffffff;" accordion-ddown></i>
+        </a>
+        <div class="tab-content tab-content--videos {{#unless product.description}}is-active{{/unless}}"  id="tab-videos" accordion-mobile-content>
+            <h2>RELATED VIDEOS</h2>
+            <ul class="videoView-thumbnails">
+                {{#filter product.custom_fields '__product-blog-video' property='name'}}
+                <li class="videoView-thumbnail">
+                {{#each (split this.value '>>')}}
+                    {{#with (trim this)}}  
+                        {{#if @index '===' 0}}
+                            <a
+                              class="videoView-thumbnail-link"
+                              data-type="video"
+                              data-video-id="{{this}}">
+                              <img src="{{cdn 'img/loading.svg'}}" data-srcset="https://img.youtube.com/vi/{{this}}/0.jpg" data-src="https://img.youtube.com/vi/{{this}}/0.jpg" data-sizes="auto" class="lazyload" alt="{{title_short}}" title="{{title_long}}">
+                            </a>  
+                        {{else}}
+                            <p class="videoView-tittle">{{this}}</p>
+                        {{/if}}
+                    {{/with}}  
+                {{/each}}
+                </li>
+              {{/filter}}
+            </ul>
+        </div>
+    </div>
+    {{> components/products/modals/videoView type='tab'}}
+    {{/if}}
+    {{#if product.warranty}}
+    <div data-tabcon="tab-warranty" data-accPosition="first">
+        <a class="dropdown-toggle w-dropdown-toggle accordion-mobile" data-accordion="tab-warranty">
+            <div class="accordion-title white">{{lang 'products.warranty'}}</div>
+            <i class="fas fa-sharp fa-chevron-down" style="color: #ffffff;" accordion-ddown></i>
+        </a>
+        <div class="container tab-content tab-content--warranty {{#unless (getVar 'hasVideo') '===' 'true'}}is-active{{/unless}}" id="tab-warranty" accordion-mobile-content>
+            {{{product.warranty}}}
+        </div>
+    </div>
+    {{/if}}
+    {{> components/custom/schematic/schematic-product }}
+    
+</div>
+

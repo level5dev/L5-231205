@@ -1,0 +1,786 @@
+---
+carousel: {{theme_settings.homepage_show_carousel}}
+---
+{{#partial "head"}}
+
+{{{ checkout.checkout_head }}}
+{{{ stylesheet '/assets/css/optimized-checkout.css' }}}
+{{ getFontsCollection }}
+
+<script type="text/javascript">
+    window.language = {{{langJson 'optimized_checkout'}}};
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+
+{{{head.scripts}}}
+
+{{/partial}}
+
+{{#partial "page"}}
+<header class="checkoutHeader optimizedCheckout-header bg-paint-splatter">
+    <div class="checkoutHeader-content">
+        <h1 class="is-srOnly">{{lang 'checkout.title'}}</h1>
+        <h2 class="checkoutHeader-heading">
+            <a class="checkoutHeader-link" href="{{urls.home}}">
+                {{#if checkout.header_image}}
+                    <img alt="{{settings.store_logo.title}}" class="checkoutHeader-logo" id="logoImage" src="{{ checkout.header_image }}"/>
+                {{ else }}
+                    <span class="header-logo-text">{{settings.store_logo.title}}</span>
+                {{/if}}
+            </a>
+            <div class="checkoutHeader-secure">
+               <img class="checkoutHeader-icon"  src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449dbe4a255ae058d21a5ac_padlock%20(1)%201.png">
+               <div>SECURE CHECKOUT</div>
+            </div>
+        </h2>
+    </div>
+</header>
+
+{{{ checkout.checkout_content }}}
+{{{ footer.scripts }}}
+
+<div id="testimonial" class="hide">
+<section class="container testimonialCarousel">
+   {{#for 1 (lang 'custom.home.testimonial-callout.number-of-callouts')}}
+    <div class="slide">
+        <blockqoute>
+            <p class="h3">
+                <span class="icon icon--qoute"><svg class="svg--quote" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 174 149" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1722 79.5C36.3026 37.6509 49.4769 24.5 69 24.5L60.0005 0C16.0006 0 3.5918 30 0.00127965 79.5H0V148.5H71V79.5H37.1722Z" fill="#d3d3d3"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M140.172 79.5C139.303 37.6509 152.477 24.5 172 24.5L163.001 0C119.001 0 106.592 30 103.001 79.5H103V148.5H174V79.5H140.172Z" fill="#d3d3d3"/></svg>
+               </span>
+               {{lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.text')}}           
+                <cite>{{~lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.name')~}}
+                    {{#if (isString (lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.middle-bits')))}}
+                        {{~lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.middle-bits')}}
+                    {{else}}
+                        {{~trim ','}}
+                    {{/if}}
+                    <a href="{{lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.link')}}">
+                        {{~lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.link-text')~}}
+                    </a>
+                </cite>
+            </p>
+        </blockqoute>
+    </div>
+    {{/for}}
+</section>
+</div>
+
+<div id="testimonialMob" class="hide">
+<section class="container testimonialCarousel">
+   {{#for 1 (lang 'custom.home.testimonial-callout.number-of-callouts')}}
+    <div class="slideMob">
+        <blockqoute>
+            <p class="h3 mobile">
+                <span class="icon icon--qoute"><svg class="svg--quote" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 174 149" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1722 79.5C36.3026 37.6509 49.4769 24.5 69 24.5L60.0005 0C16.0006 0 3.5918 30 0.00127965 79.5H0V148.5H71V79.5H37.1722Z" fill="#d3d3d3"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M140.172 79.5C139.303 37.6509 152.477 24.5 172 24.5L163.001 0C119.001 0 106.592 30 103.001 79.5H103V148.5H174V79.5H140.172Z" fill="#d3d3d3"/></svg>
+               </span>
+               {{lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.text')}}           
+                <cite class="mobile">{{~lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.name')~}}
+                    {{#if (isString (lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.middle-bits')))}}
+                        {{~lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.middle-bits')}}
+                    {{else}}
+                        {{~trim ','}}
+                    {{/if}}
+                    <a href="{{lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.link')}}">
+                        {{~lang (concat (concat 'custom.home.testimonial-callout.callout-' $index) '.link-text')~}}
+                    </a>
+                </cite>
+            </p>
+        </blockqoute>
+    </div>
+    {{/for}}
+</section>
+</div>
+
+<!-- <div class="container">
+      {{> components/custom/testimonial-callout }}
+</div> -->
+
+{{> components/custom/return-policy}}
+{{> components/custom/customer-service}}
+{{> components/custom/warranty-info}}
+
+<div class="modal-backgrounds" style></div>
+    
+<div id="checkoutID" class="hide" data-value={{checkout.id}}></div>
+
+
+{{/partial}}
+
+{{> layout/empty}}
+
+<script>
+var slides = document.querySelectorAll('.slide');
+var currentSlide = 0;
+var slideInterval = setInterval(nextSlide,5000);
+var slidesMob = document.querySelectorAll('.slideMob');
+var currentSlideMob = 0;
+var slideInterval = setInterval(nextSlideMob,5000);
+
+function nextSlide() {
+   slides[currentSlide].className = 'slide';
+   currentSlide = (currentSlide+1)%slides.length;
+   slides[currentSlide].className = 'slide showing';
+}
+
+function nextSlideMob() {
+   slidesMob[currentSlideMob].className = 'slideMob';
+   currentSlideMob = (currentSlideMob+1)%slidesMob.length;
+   slidesMob[currentSlideMob].className = 'slideMob showing';
+}
+</script>
+<script>
+let checkoutID = document.getElementById('checkoutID').getAttribute('data-value')
+let itemTemplate = [];
+let originalPrice;
+
+const template = `<ul aria-live="polite" class="productList">
+            <li class="productList-item is-visible">
+               <div class="product" data-test="cart-item">
+                  <figure class="product-column product-figure"><img alt="Gooseneck Filler Tube" data-test="cart-item-image" src="https://cdn11.bigcommerce.com/s-89a9ntp16/products/494/images/2654/2654__79077.1679699970.220.290.jpg?c=1"></figure>
+                  <div class="product-column product-body">
+                     <h4 class="product-title optimizedCheckout-contentPrimary" data-test="cart-item-product-title">1 x Gooseneck Filler Tube</h4>
+                  </div>
+                  <div class="product-column product-actions">
+                     <div class="product-price optimizedCheckout-contentPrimary" data-test="cart-item-product-price" style="text-decoration: line-through;">$80.99</div>
+               <div class="product-price discounted optimizedCheckout-contentPrimary" data-test="cart-item-product-price">$80.99</div>
+                  </div>
+               </div>
+            </li>
+            <li class="productList-item is-visible">
+               <div class="product" data-test="cart-item">
+                  <figure class="product-column product-figure"><img alt="Automatic Taper, 10/12&quot; Flat Boxes, 3&quot; Corner Finisher, Angle Box, Pump, Roller, Std. Handles" data-test="cart-item-image" src="https://cdn11.bigcommerce.com/s-89a9ntp16/products/469/images/3414/3414__08692.1679935866.220.290.jpg?c=1"></figure>
+                  <div class="product-column product-body">
+                     <h4 class="product-title optimizedCheckout-contentPrimary" data-test="cart-item-product-title">1 x Automatic Taper, 10/12" Flat Boxes, 3" Corner Finisher, Angle Box, Pump, Roller, Std. Handles</h4>
+                  </div>
+                  <div class="product-column product-actions">
+                     <div class="product-price optimizedCheckout-contentPrimary" data-test="cart-item-product-price" style="text-decoration: line-through;">$2,979.90</div>
+                     <div class="product-price discounted optimizedCheckout-contentPrimary" data-test="cart-item-product-price">$2,979.90</div>
+                  </div>
+               </div>
+            </li>
+         </ul>`
+         
+const popupText = `<div class="checkout-popup">
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aa4c8132e9bed78912_verified%201.png">
+            <div class="popup-text">This is a secure transaction</div>
+         </div>
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aaf6e64b89240520f7_headphone%201.png">
+            <div class="popup-text">Industry leading <span id="customer-service" class="popup-textspan">customer service </span>& <span id="warranties"class="popup-textspan">warranties</span></div>
+         </div>
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aafcf06474d509615e_product-return%201.png">
+            <div id="return-policy" class="popup-text">Hassle free <span class="popup-textspan">return policy</span></div>
+         </div>
+      </div>`
+      
+const popupTextMob = `<div class="checkout-popup mobile">
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aa4c8132e9bed78912_verified%201.png">
+            <div class="popup-text">This is a secure transaction</div>
+         </div>
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aaf6e64b89240520f7_headphone%201.png">
+            <div class="popup-text">Industry leading <span id="customer-service-mob" class="popup-textspan">customer service </span>& <span id="warranties-mob"class="popup-textspan">warranties</span></div>
+         </div>
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aafcf06474d509615e_product-return%201.png">
+            <div id="return-policy-mob" class="popup-text">Hassle free <span class="popup-textspan">return policy</span></div>
+         </div>
+      </div>`
+      
+      const timeoutMobile = setTimeout(runMobile, 10000);
+      
+      function runMobile(){
+         var markerDiv = document.createElement("div");
+         markerDiv.innerHTML = popupTextMob
+         const testimonialMob = document.querySelector('#testimonialMob')
+         testimonialMob.classList.remove('hide')
+         document.querySelector(".layout-main").appendChild(markerDiv.firstChild);
+         document.querySelector(".layout-main").appendChild(testimonialMob);
+         
+         document.querySelector('#return-policy-mob').addEventListener('click', ()=> {
+                  document.querySelector('#modal-return-policy').classList.add('open')
+                  document.querySelector('.modal-backgrounds').classList.add('has-activeModal')
+         })
+         
+         document.querySelector('#customer-service-mob').addEventListener('click', ()=> {
+                  document.querySelector('#modal-customer-service').classList.add('open')
+                  document.querySelector('.modal-backgrounds').classList.add('has-activeModal')
+         })
+         
+         document.querySelector('#warranties-mob').addEventListener('click', ()=> {
+                  document.querySelector('#modal-warranties').classList.add('open')
+                  document.querySelector('.modal-backgrounds').classList.add('has-activeModal')
+         })
+         
+         const cbox = document.querySelectorAll('.modal-close')
+         for (let i = 0; i < cbox.length; i++) {
+            cbox[i].addEventListener("click", function() {
+               const dbox = document.querySelectorAll('.modal')
+               for (let j = 0; j < dbox.length; j++) {
+                  dbox[j].classList.remove('open')
+                  document.querySelector('.modal-backgrounds').classList.remove('has-activeModal')
+               }
+            });
+         }
+      }
+      
+      
+
+      axios.get("https://eoplydyv3ml24mx.m.pipedream.net", {
+        params: { id: checkoutID },
+      }).then(function (response) {
+           cartItem = response.data.cart.line_items.physical_items
+         //   const myTimeout = setTimeout(myGreeting, 5000);
+           
+           
+           for(let item = 0; item < cartItem.length; item++ ){
+               originalPrice = cartItem[item].original_price * cartItem[item].quantity;
+               if (cartItem[item].original_price == cartItem[item].sale_price){
+                  itemTemplate[item] = `<li class="productList-item is-visible a">
+                                    <div class="product" data-test="cart-item">
+                                       <figure class="product-column product-figure">
+                                          <img alt="${cartItem[item].name}" data-test="cart-item-image" src="${cartItem[item].image_url}">
+                                       </figure>
+                                       <div class="product-column product-body">
+                                          <h4 class="product-title optimizedCheckout-contentPrimary" data-test="cart-item-product-title">${cartItem[item].quantity} x ${cartItem[item].name}</h4>
+                                       </div>
+                                       <div class="product-column product-actions">
+                                          <div class="product-price optimizedCheckout-contentPrimary" data-test="cart-item-product-price">$${cartItem[item].extended_list_price.toLocaleString()}</div>
+                                       </div>
+                                    </div>
+                                 </li>`
+               }else{
+                  itemTemplate[item] = `<li class="productList-item is-visible a">
+                                    <div class="product" data-test="cart-item">
+                                       <figure class="product-column product-figure">
+                                          <img alt="${cartItem[item].name}" data-test="cart-item-image" src="${cartItem[item].image_url}">
+                                       </figure>
+                                       <div class="product-column product-body">
+                                          <h4 class="product-title optimizedCheckout-contentPrimary" data-test="cart-item-product-title">${cartItem[item].quantity} x ${cartItem[item].name}</h4>
+                                       </div>
+                                       <div class="product-column product-actions">
+                                          <div class="product-price original optimizedCheckout-contentPrimary" data-test="cart-item-product-price">$${originalPrice.toLocaleString()} </div>
+                                          <div class="product-price discounted optimizedCheckout-contentPrimary" data-test="cart-item-product-price">$${cartItem[item].extended_list_price.toLocaleString()}</div>
+                                       </div>
+                                    </div>
+                                 </li>`
+               }
+               
+           }
+         myInterval = setInterval(function () {
+            myGreeting();
+         }, 500);
+         
+ 
+         function myGreeting() {
+            let itemList = document.querySelectorAll('.productList-item'); 
+            for (let i=0; i < itemList.length; i++){
+               clearInterval(myInterval);
+               listenEvent();
+               itemList[i].parentNode.removeChild(itemList[i])
+               // document.querySelector('.cart-actions').parentNode.removeChild(document.querySelector('.cart-actions'))
+            }
+            
+            for(let item = 0; item < cartItem.length; item++ ){
+               document.querySelector('.productList').innerHTML += itemTemplate[item]
+            }
+            
+            const node = `<div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aa4c8132e9bed78912_verified%201.png">
+            <div class="popup-text">This is a secure transaction</div>
+         </div>
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aaf6e64b89240520f7_headphone%201.png">
+            <div class="popup-text">Industry leading <span id="customer-service" class="popup-textspan">customer service </span>& <span id="warranties"class="popup-textspan">warranties</span></div>
+         </div>
+         <div class="checkout-popuptext">
+            <img class="popup-icon" src="https://uploads-ssl.webflow.com/634d1196dfe3ee1059acb423/6449e3aafcf06474d509615e_product-return%201.png">
+            <div id="return-policy" class="popup-text">Hassle free <span class="popup-textspan">return policy</span></div>
+         </div>`
+         
+         const nodecheckout = document.createElement("div");
+         var testimonial = document.querySelector('#testimonial')
+         nodecheckout.classList.add('checkout-popup')
+         
+         nodecheckout.innerHTML += node;
+        //  document.getElementById("myList").appendChild(nodecheckout);
+         testimonial.classList.remove('hide')
+         document.querySelector('.layout-cart').appendChild(nodecheckout);
+         document.querySelector(".layout-cart").appendChild(testimonial);
+            
+            
+            document.querySelector('#return-policy').addEventListener('click', ()=> {
+               document.querySelector('#modal-return-policy').classList.add('open')
+               document.querySelector('.modal-backgrounds').classList.add('has-activeModal')
+            })
+            
+            document.querySelector('#customer-service').addEventListener('click', ()=> {
+               document.querySelector('#modal-customer-service').classList.add('open')
+               document.querySelector('.modal-backgrounds').classList.add('has-activeModal')
+            })
+            
+            document.querySelector('#warranties').addEventListener('click', ()=> {
+               document.querySelector('#modal-warranties').classList.add('open')
+               document.querySelector('.modal-backgrounds').classList.add('has-activeModal')
+            })
+            
+            const cbox = document.querySelectorAll('.modal-close')
+            for (let i = 0; i < cbox.length; i++) {
+               cbox[i].addEventListener("click", function() {
+                  const dbox = document.querySelectorAll('.modal')
+                  for (let j = 0; j < dbox.length; j++) {
+                     dbox[j].classList.remove('open')
+                     document.querySelector('.modal-backgrounds').classList.remove('has-activeModal')
+                  }
+               });
+            }
+         }
+         
+         function listenEvent(){
+            if(document.querySelector('.cartDrawer') != null){
+               document.querySelector('.cartDrawer').addEventListener('click', ()=> {
+               const myTimeout = setTimeout(function(){
+                  let itemList = document.querySelectorAll('.productList-item'); 
+                  for (let i=0; i < itemList.length; i++){
+                     itemList[i].parentNode.removeChild(itemList[i])
+                  }
+                  for(let item = 0; item < cartItem.length; item++ ){
+                     document.querySelector('.productList').innerHTML += itemTemplate[item]
+                  }
+               }, 500);
+            })
+            }
+             
+
+         }
+      }).catch((error) => {
+           console.log(error);
+      });
+         
+         
+         
+         
+
+    
+</script>
+
+<style>
+.hide {
+   display:none;
+}
+
+p {
+   font-size: 1rem;
+   font-weight: 400;
+   line-height: 1.5;
+   margin-bottom: 1.5rem;
+   text-rendering: optimizeLegibility;
+}
+
+.has-activeModal.modal-backgrounds {
+   display: block;
+}
+   
+@media screen and (min-width:970px){
+   .checkout-popup.mobile{
+      display: none;
+   }
+   
+   #testimonialMob {
+      display: none;
+   }
+}
+
+@media screen and (max-width: 970px){
+   #testimonial {
+      display: none;
+   }
+}
+   
+.product-title{
+   font-size: 10px;
+}
+   
+   /* @media screen and (max-width:551px){
+      .modals{
+         min-height: 0vh;
+         width:90%;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+      }
+   } */
+.popup-icon {
+   padding-right:15px;
+}
+   
+.checkoutHeader-logo {
+   @media screen and (max-width: 500px){
+      max-width: 90%;
+   }
+   
+   @media screen and (max-width: 290px){
+      max-width: 75%;
+   }
+}
+   
+.checkoutHeader-icon {
+   padding-right:15px;
+   
+   @media screen and (max-width: 500px){
+      max-width: 50%;
+      width:13%;
+      padding-right:3px;
+   }
+   
+   @media screen and (max-width: 290px){
+      max-width: 50%;
+      width:15%;
+      padding-right:2px;
+   }
+}
+   
+.modal-close {
+   right: 1.75rem;
+   top: 0.3em;
+   font-size: 40px;
+   color: #999;
+   font-family: "Roboto";
+   transform: initial;
+   
+   :hover{
+      color: #dc0000;
+   }
+}
+   
+.modal-backgrounds {
+   background: #333;
+   background: rgba(68,68,68,.95);
+   bottom: 0;
+   display: none;
+   left: 0;
+   position: fixed;
+   right: 0;
+   top: 0;
+   z-index: 1000;
+   left: 0;
+   opacity: 0.5;
+}
+    
+/* img{
+   padding-right:15px;
+} */
+    
+.layout-cart-custom {
+   padding-left: 1.1538461538rem;
+   padding-right: 1.1538461538rem;
+   width: 100%;
+   float: left;
+   
+   @media (min-width: 968px) {
+      width: 41.6666666667%;
+   }
+}
+
+.checkoutHeader-heading {
+   display:flex;
+   justify-content: space-between;
+}
+    
+.checkoutHeader-secure {
+   font-family: "Oswald", sans-serif;
+   font-weight: 400;
+   font-size: 27.95px;
+   line-height: 124.7%;
+   color: #ffffff;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-content: center;
+   justify-content: space-around;
+   align-items: center;
+
+   @media screen and (max-width:500px){
+      font-size:20px;
+   }
+
+   @media screen and (max-width:370px){
+      font-size:18px;
+   }
+
+   @media screen and (max-width:290px){
+      font-size:13px;
+   }
+}
+    
+.checkout-popuptext {
+   display: flex;
+   flex-direction: row;
+   align-content: center;
+   justify-content: flex-start;
+   align-items: center;
+   padding-bottom: 20px;
+   cursor: pointer;
+}
+
+.popup-text {
+   font-size: 12px;
+   font-family: "Roboto";
+   line-height: 124.7%;
+   letter-spacing: 0.5px;
+   font-weight: 500;
+   color: #000000;
+}
+    
+.popup-textspan {
+   color: #B8000D;
+}
+    
+    /* .product-price {
+       font-size:10px;
+       text-decoration: line-through;
+    } */
+    
+.product-price.original {
+   font-size:10px;
+   text-decoration: line-through;
+}
+    
+.product-price.discounted {
+   font-family: "Montserrat";
+   font-weight: 500;
+   color: #C20000;
+   font-size: 14px;
+   text-decoration: none;
+}   
+
+.modal.open {
+   display: block; 
+   opacity: 1; 
+   visibility: visible;
+}
+
+.modal {
+   width: 440px;
+   border-radius: 0;
+}
+
+.modal-div {
+   padding-bottom:25px;
+}
+
+.text-block-4 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-family: Oswald, sans-serif;
+   color: #000;
+   font-size: 27.95px;
+   line-height: 124.7%;
+   padding-bottom:25px;
+   text-align: center;
+}
+
+.text-block-5 {
+   display: flex;
+   padding-bottom: 20px;
+   padding-right: 45px;
+   padding-left: 45px;
+   justify-content: center;
+   align-items: center;
+   font-family: Roboto, sans-serif;
+   color: #414141;
+   font-size: 14.91px;
+   line-height: 124.7%;
+   text-align: center;
+   letter-spacing: 0.5px;
+   
+   @media screen and (max-width:500px){
+      padding-left: 15px;
+      padding-right: 15px;
+   }
+}
+   
+.container.testimonialCarousel{
+	position: relative;
+	height: 150px;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+
+.slide{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 1;
+
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	transition: opacity 1s;
+}
+
+.slideMob {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 1;
+
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	transition: opacity 1s;
+}
+
+.showing{
+	opacity: 1;
+	z-index: 2;
+}
+
+.slide{
+	font-size: 40px;
+	/* padding: 40px; */
+	box-sizing: border-box;
+/* 	color: #222; */
+}
+
+.testimonialCarousel blockqoute {
+    position: relative;
+    display: block;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+.testimonialCarousel blockqoute p {
+    position: relative;
+    font-family: Roboto,Arial,Helvetica,sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: none;
+    margin: 0;
+    font-size: 12px;
+    /* font-size: calc(7px + (26 - 18) * ((100vw - 769px) / (1441 - 769))); */
+    /* padding: 1rem; */
+    line-height: 1.7;
+    color: #222;
+}
+
+.testimonialCarousel blockqoute p.h3.mobile {
+    position: relative;
+    font-family: Roboto,Arial,Helvetica,sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: none;
+    margin: 0;
+    font-size: calc(16px + (26 - 18) * ((100vw - 769px) / (1441 - 769)));
+    /* padding: 1rem; */
+    line-height: 1.5em;
+    color: #222;
+}
+
+.testimonialCarousel .icon--qoute {
+    position: relative;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    fill: #d3d3d3;
+    margin-right: 0.5rem;
+}
+
+.testimonialCarousel blockqoute cite {
+    color: #222;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-style: normal;
+    font-weight: 400;
+    font-size:10px;
+    /* font-size: calc(6px + (16 - 12) * ((100vw - 769px) / (1441 - 769))); */
+}
+
+.testimonialCarousel blockqoute cite.mobile {
+    color: #222;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(13px + (16 - 12) * ((100vw - 769px) / (1441 - 769)));
+}
+
+.testimonialCarousel blockqoute cite:before {
+    content: "\2014 \2009";
+}
+
+.testimonialCarousel blockqoute cite a {
+    color: #b8000d;
+}
+
+/* .icon {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+} */
+
+.testimonialCarousel .icon--qoute svg {
+    position: absolute;
+    left: 0;
+    top: -7px;
+}
+
+svg.svg--quote {
+  fill: rgb(211, 211, 211);
+}
+
+svg.svg--quote path {
+  fill: inherit;
+}
+
+svg.svg--quote:hover {
+  fill: #b8000d
+}  
+
+@media screen and (max-width:500px){
+   .product {
+      flex-wrap:nowrap;
+   }
+
+   .product-body {
+      order:0;
+      padding-right: 8px;
+   }
+   
+   .product-figure {
+      padding-right: 0.5rem;
+   } 
+   
+   .product-price.original {
+      display: flex;
+      justify-content: flex-end;
+   }
+   
+   .product-actions {
+      align-self: flex-start;
+   }
+}
+    
+</style>

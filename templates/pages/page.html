@@ -1,0 +1,57 @@
+{{#partial "page"}}
+{{#if page.id '==' 15}}
+    {{> components/page/vip}}
+{{else if page.id '==' 18}}
+    {{> components/page/financing}}
+{{else if page.id '==' 20}}
+    {{> components/page/schematic}}
+{{else if page.id '==' 2}}
+    {{> components/page/shipping-and-return}}
+{{else if page.id '==' 23}}
+    {{> components/page/warranty-page}}
+{{else if page.id '==' 24}}
+    {{> components/page/warranty-confirmation}}
+{{else}}
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+<section class="page">
+    {{!-- {{page.id}} --}}
+    {{#unless theme_settings.hide_page_heading }}
+        <h1 class="page-heading">{{ page.title }}</h1>
+    {{/unless}}
+
+    {{#if page.sub_pages}}
+    <nav class="navBar navBar--sub">
+        <ul class="navBar-section account-navigation">
+        {{#each page.sub_pages}}
+            <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+        {{/each}}
+        </ul>
+    </nav>
+    {{/if}}
+
+    {{{region name="page_builder_content"}}}
+
+    <div class="page-content page-content--centered">
+        {{#replace '%%Syndicate%%' page.content}}
+            {{> components/page/rss_feed}}
+        {{else}}
+            <p>{{{page.content}}}</p>
+        {{/replace}}
+    </div>
+
+    {{#if page.feed}}
+        <ul>
+            {{#each page.feed}}
+                <li>
+                    <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+                    <p>{{content}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+</section>
+{{/if}}
+
+{{/partial}}
+
+{{> layout/base container_active=true}}
