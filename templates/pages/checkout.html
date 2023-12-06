@@ -782,5 +782,27 @@ svg.svg--quote:hover {
       align-self: flex-start;
    }
 }
+
+.loadingOverlay::before {
+   border-color: #fff #fff #333 #333;
+   top: 0%;
+   transform: inherit;
+}
+
+.optimizedCheckout-buttonPrimary {
+    
+   &[disabled] {
+       border-color: #fff #fff #333 #333;
+       top: 0%;
+       transform: inherit;
+   }
+   
+}
+
+@media screen and (min-width:500px){
+   .creditCardTypes-list {
+      flex-wrap: nowrap;
+   }
+}
     
 </style>

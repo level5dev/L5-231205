@@ -39,10 +39,10 @@
         if (mutation.addedNodes) {
           for (const addedNode of mutation.addedNodes) {
             if (addedNode.nodeType === 1 && addedNode.getAttribute('data-accPosition') === 'last') {
-                var $thirdAccordion = document.querySelector('[data-accPosition="last"]');
-                var $firstAccordion = document.querySelector('[data-accPosition="first"]');
+                // var $thirdAccordion = document.querySelector('[data-accPosition="last"]');
+                // var $firstAccordion = document.querySelector('[data-accPosition="first"]');
     
-                $thirdAccordion.parentNode.insertBefore($thirdAccordion, $firstAccordion);
+                // $thirdAccordion.parentNode.insertBefore($thirdAccordion, $firstAccordion);
     
                 observer.disconnect();
                 isElementAppended = true;

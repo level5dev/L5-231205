@@ -1,21 +1,21 @@
 //console.log("accordion.js");
-// Check if the device is mobile
-function isMobileDevice() {
-  return window.innerWidth <= 767; // Adjust the width value as per your needs
-}
-
-// Remove the class if the device is mobile
-if (isMobileDevice()) {
-  //$('.tabs-contents .is-active[accordion-mobile-content]').removeClass('is-active');
-} else {
-}
 
 if (window.innerWidth >= 480) {
-  // console.log("more than 480 ");
   if ($("[data-tabcon] .tab-content.is-active").length == 0) {
-    let clicktab = $("[data-acctabid]").eq(0).data("acctabid");
-    $("[data-acctabid]").eq(0).click();
-    $(`#${clicktab}`).addClass("is-active");
+    $("[data-acctabid]").each(function () {
+      let tabName = $(this).data("acctabid");
+      console.log(tabName);
+      if (tabName == "tab-videos") {
+        $(this).addClass("is-active");
+        $(`#${tabName}`).addClass("is-active");
+        return false; // This will break out of the loop
+      }
+      // else {
+      //   let clicktab = $("[data-acctabid]").eq(0).data("acctabid");
+      //   $("[data-acctabid]").eq(0).click();
+      //   $(`#${clicktab}`).addClass("is-active");
+      // }
+    });
   }
 } else {
   //console.log("less than 480");

@@ -89,6 +89,8 @@ export default class ImageGallery {
         const options = {
             index: itemIndex || 0,
             bgOpacity: 0.8,
+            closeOnScroll: false,
+            closeOnVerticalDrag: false,
         };
 
         const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUIDefault, this.photoswipeItems, options);

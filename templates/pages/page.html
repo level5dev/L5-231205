@@ -1,8 +1,11 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 {{#partial "page"}}
 {{#if page.id '==' 15}}
     {{> components/page/vip}}
 {{else if page.id '==' 18}}
     {{> components/page/financing}}
+{{else if page.id '==' 19}}
+    {{> components/page/parts title=page.title}}
 {{else if page.id '==' 20}}
     {{> components/page/schematic}}
 {{else if page.id '==' 2}}

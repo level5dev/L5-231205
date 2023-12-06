@@ -750,6 +750,71 @@
           }
         }
       },
+	  "parts-components": {
+        "category": {
+          "total": "10",
+          "head-1": {
+            "title": "Automatic Taper",
+            "slug": "auto-taper",
+            "short-title": "Automatic Taper",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-2": {
+            "title": "MiniShot Compound Tube",
+            "slug": "minishot",
+            "short-title": "MinisHot",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-3": {
+            "title": "Tool Handles",
+            "slug": "tools",
+            "short-title": "Handles",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-4": {
+            "title": "Flat Boxes",
+            "slug": "boxes",
+            "short-title": "Boxes",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-5": {
+            "title": "Compound Pump & Accessories",
+            "slug": "pump",
+            "short-title": "Pump",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-6": {
+            "title": "Corner Finishers",
+            "slug": "corner-finisher",
+            "short-title": "Corner Finisher",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-7": {
+            "title": "Corner Applicators",
+            "slug": "corner-applicator",
+            "short-title": "Corner Applicator",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-8": {
+            "title": "Corner Roller",
+            "slug": "roller",
+            "short-title": "Corner Roller",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-9": {
+            "title": "Nail Spotters",
+            "slug": "spotter",
+            "short-title": "Spotters",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          },
+          "head-10": {
+            "title": "Maintenance Kits",
+            "slug": "kits",
+            "short-title": "Maintenance Kits",
+            "image": "https://cdn11.bigcommerce.com/s-89a9ntp16/images/stencil/original/image-manager/skimming-blade-category-photo.jpg"
+          }
+        }
+      },
 	"4-772-MiniShot": {
 		"title": "MiniShot",
 		"subtitle": "4-772",

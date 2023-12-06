@@ -78,11 +78,11 @@ body.mm-ocd-opened {
     transition-timing-function: ease
 }
 
-.mm-ocd--left .mm-ocd__content {
-    left: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0)
-}
+// .mm-ocd--left .mm-ocd__content {
+//     left: 0;
+//     -webkit-transform: translate3d(-100%, 0, 0);
+//     transform: translate3d(-100%, 0, 0)
+// }
 
 .mm-ocd--right .mm-ocd__content {
     right: 0;

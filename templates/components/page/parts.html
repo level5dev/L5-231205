@@ -1,0 +1,75 @@
+
+<div id="parts--page">
+    <nav aria-label="Breadcrumb">
+        <ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList" style="text-align: left;">
+            <li class="breadcrumb" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a href="javascript:void(0)" class="home-link" onclick="goToHomePage()">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a class="breadcrumb-label" itemprop="item" href="{{url}}">
+                    <span itemprop="name" style="text-transform: uppercase;font-weight: 400;"> / Parts & Components</span>
+                </a>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="align--ctr">
+        <h1 class="page-heading" data-parts-head style="color: #690a0a;">{{title}}</h1>
+        <h4 class="page-heading parts-sub">{{title}}</h4>
+    </div>
+
+    <div class="parts-container flex-start-section">
+        <div class="actionBar filter--section">
+            <div class="filter_element--block show">
+                {{#for (lang 'custom.page.parts-components.category.total')}}
+               <li class="tag--block">
+                    <div class="tag_title--block">
+                        <a class="product--name" href="#" parts-li-btn="{{lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.slug')}}">
+                            {{lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.title')}}
+                        </a>
+                    </div>
+                </li>
+                {{/for}}
+            </div>            
+        </div>
+        <div class="parts-component-block">
+            <div parts-card-block>
+                {{#for (lang 'custom.page.parts-components.category.total')}}
+                    <a href="#" data-parts-card="{{lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.slug')}}">
+                        <div class="card-wrapper">
+                            <article class="card">
+                                <figure class="card-figure">
+                                    {{!-- <div class="sale-flag-sash-cat">
+                                        <span class="sale-text" style="font-size:1.2em;">20% OFF</span>
+                                    </div> --}}
+                                    <div class="card-figure__link">
+                                        <div class="card-img-container">
+                                            <img src="{{lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.image')}}">
+                                        </div>
+                                    </div>
+                                </figure>
+                                <div class="card-body">
+                                    <h3 class="productView-type-title h4" style="font-size:1.4em;">{{lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.short-title')}}</h3>
+                                </div>
+                            </article>
+                        </div>
+                    </a>
+                {{/for}}
+            </div>
+            <div parts-list-block>
+                    {{#for (lang 'custom.page.parts-components.category.total')}}
+                    <div data-parts-dropdown="{{lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.slug')}}">
+                        {{> components/custom/schematic/parts-components-product 
+                            list=(lang (concat (concat 'custom.page.parts-components.category.head-'$index)'.slug'))
+                        }}
+                    </div>
+                    {{/for}}
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{cdn 'assets/js/theme/custom/parts.js'}}" type="module"></script>
+<script src="{{cdn 'assets/js/theme/custom/accordion.js'}}" type="module"></script>

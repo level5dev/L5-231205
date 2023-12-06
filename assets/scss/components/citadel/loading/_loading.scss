@@ -11,3 +11,9 @@
     display: none;
     z-index: zIndex("low");
 }
+
+#bigcommerce .loadingOverlay::before {
+    //border-color: #fff #fff #333 #333;
+    //top: 0%;
+    transform: inherit;
+}

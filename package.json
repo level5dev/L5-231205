@@ -7,7 +7,7 @@
     "author": "BigCommerce",
     "license": "MIT",
     "dependencies": {
-        "@bigcommerce/stencil-cli": "^7.2.3",
+        "@bigcommerce/stencil-cli": "^7.3.1",
         "@bigcommerce/stencil-utils": "^6.8.1",
         "caniuse-lite": "^1.0.30001373",
         "core-js": "^3.9.0",
